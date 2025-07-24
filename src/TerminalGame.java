@@ -14,6 +14,13 @@ enum LetterStatus {
 
 public class TerminalGame {
 
+    // --- CÓDIGOS DE COR ANSI PARA O TERMINAL ---
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_WHITE_TEXT = "\u001B[97m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_GRAY_BACKGROUND = "\u001B[100m";
+
     public static void main(String[] args) {
         System.out.println("--- BEM VINDO AO MEU JOGO DE TERMO ---");
 
@@ -40,15 +47,33 @@ public class TerminalGame {
             }
 
             LetterStatus[] result = processGuess(secretWord, guess);
-            System.out.println("Resultado: " + Arrays.toString(result));
+
+            System.out.print("Resultado: ");
+            for (int i = 0; i < result.length; i++) {
+                char letter = guess.charAt(i);
+                switch (result[i]) {
+                    case CORRECT_POSITION:
+                        System.out.print(ANSI_GREEN_BACKGROUND + ANSI_WHITE_TEXT + " " + letter + " " + ANSI_RESET);
+                        break;
+                    case WRONG_POSITION:
+                        System.out.print(ANSI_YELLOW_BACKGROUND + ANSI_WHITE_TEXT + " " + letter + " " + ANSI_RESET);
+                        break;
+                    case NOT_IN_WORD:
+                        System.out.print(ANSI_GRAY_BACKGROUND + ANSI_WHITE_TEXT + " " + letter + " " + ANSI_RESET);
+                        break;
+                }
+                System.out.print(" ");
+            }
+            System.out.println();
+
 
             if (guess.equals(secretWord)) {
-                System.out.println("Você acertou a palavra!");
+                System.out.println("\nPARABÉNS! Você acertou a palavra!");
                 break;
             }
 
             if (attempt == maxAttempts) {
-                System.out.println("Jogo encerrado! A palavra era: " + secretWord);
+                System.out.println("\nJogo encerrado! A palavra era: " + secretWord);
             }
         }
 
