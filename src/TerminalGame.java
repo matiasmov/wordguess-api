@@ -14,7 +14,7 @@ enum LetterStatus {
 
 public class TerminalGame {
 
-    // --- CÓDIGOS DE COR ANSI PARA O TERMINAL ---
+    // --- CÓDIGOS DE COR ANSI PARA O TERMINAL  ---
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_WHITE_TEXT = "\u001B[97m";
     public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
